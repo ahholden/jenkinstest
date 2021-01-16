@@ -6,10 +6,10 @@ node ('docker'){
      extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/ahholden/jenkinstest.git']]])
   }
   stage('Build'){
-    dockerImage = docker.build('ahholden/agent-dnc:v$BUILD_NUMBER', './dotnetcore');
+    dockerImage = docker.build('ahholden/agent-dnc:v$BUILD_NUMBER', ./dotnetcore');
   }
   stage('Push'){
-    docker.withRegistry('', 'dockerhubcreds'){
+    docker.withRegistry('', 'dockerhub-credentials'){
       dockerImage.push();
     }
   }
