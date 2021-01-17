@@ -9,7 +9,7 @@ node ('docker'){
     dockerImage = docker.build('ahholden/agent-dnc:v$BUILD_NUMBER', './dotnetcore');
   }
   stage('Push'){
-    docker.withRegistry('', 'dockerhub-credentials'){
+    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials'){
       dockerImage.push();
     }
   }
